@@ -1,0 +1,48 @@
+<%@ page  import="java.sql.*" import="databaseconnection.*"%>
+<%
+String pass=null,uid=null;
+
+String a = request.getParameter("vname");
+String b= request.getParameter("address");
+String c= request.getParameter("age");
+String d= request.getParameter("gender");
+String e= request.getParameter("mobileno");
+String f= request.getParameter("email");
+String g= request.getParameter("password");
+String name=null,u=null,test2=null;
+
+
+
+
+try
+{
+
+	/*
+	Connection con1 = databasecon.getconnection();
+	String sss1 = " insert into victim(vname,address,age,gender,mobileno,email,password,uidno,status) values(?,?,?,?,?,?,?,?,?)";
+	PreparedStatement st = con1.prepareStatement(sss1);
+	st.setString(1,a);
+	st.setString(2,b);
+	st.setString(3,c);
+	st.setString(4,d);
+	st.setString(5,e);
+	st.setString(6,f);
+	st.setString(7,g);
+	st.setString(8,"NONE");
+	st.setString(9,"NO");
+	
+	int rs=st.executeUpdate();
+	if(rs!=0){
+	response.sendRedirect("vregister.jsp?msg=null");
+	}
+	else{
+		response.sendRedirect("vregister.jsp?mssg=null");
+	}
+	*/
+	
+}
+catch(Exception ee){System.out.println(ee);
+ee.printStackTrace();
+response.sendRedirect("vregister.jsp?mssg=null");
+}
+%>

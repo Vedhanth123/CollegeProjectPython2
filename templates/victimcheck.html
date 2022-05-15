@@ -1,0 +1,54 @@
+<%@ page  import="java.sql.*" import="databaseconnection.*" import="javax.swing.JOptionPane"%>
+<%@ page  import="Mail.mail"%>
+<%@ page import="java.util.*" %>
+
+<%
+String pass=null,uid=null;
+
+String a = request.getParameter("name");
+String b= request.getParameter("uidno");
+String c= request.getParameter("pass");
+String name=null,u=null,test2=null;
+
+
+
+try
+{
+	
+	
+	Connection con1 = databasecon.getconnection();
+
+	Statement st1 = con1.createStatement();
+	
+	String sss1 = "select * from victim where vname='"+a+"' && password='"+c+"' and uidno='"+b+"' and status='YES'  ";
+		
+	System.out.println(sss1);
+	ResultSet rs1=st1.executeQuery(sss1);
+	if(rs1.next())
+	{
+		 
+		
+		session.setAttribute("vno",rs1.getString("vno"));
+		session.setAttribute("vname",rs1.getString("vname"));
+		session.setAttribute("uidno",rs1.getString("uidno"));
+		session.setAttribute("email",rs1.getString("email"));
+	response.sendRedirect("victimhome.jsp?msg=null");
+	}
+
+	else
+			{
+     	response.sendRedirect("victim.jsp?m=null");
+	}
+
+
+
+}
+catch(Exception e1)
+{
+out.println(e1);
+}
+
+%>
+	
+	
+

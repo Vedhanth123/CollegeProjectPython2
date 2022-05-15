@@ -1,0 +1,44 @@
+<%@ page  import="java.sql.*" import="databaseconnection.*"%>
+<%
+String pass=null,uid=null;
+
+String a = request.getParameter("name");
+String b= request.getParameter("area");
+String c= request.getParameter("mobileno");
+String d= request.getParameter("mailid");
+String e= request.getParameter("password");
+
+String name=null,u=null,test2=null;
+
+
+
+
+try
+{
+
+	Connection con1 = databasecon.getconnection();
+String sss1 = " insert into investigator(name,area,mobileno,mailid,password,status) values(?,?,?,?,?,?)";
+	PreparedStatement st = con1.prepareStatement(sss1);
+	st.setString(1,a);
+	st.setString(2,b);
+	st.setString(3,c);
+	st.setString(4,d);
+	st.setString(5,e);
+	st.setString(6,"NO");
+	
+	
+	int rs=st.executeUpdate();
+	if(rs!=0){
+	response.sendRedirect("iregister.jsp?msg=null");
+	}
+	else{
+		response.sendRedirect("iregister.jsp?mssg=null");
+	}
+}
+catch(Exception ee){System.out.println(ee);
+ee.printStackTrace();
+response.sendRedirect("iregister.jsp?mssg=null");
+}
+%>
+
+

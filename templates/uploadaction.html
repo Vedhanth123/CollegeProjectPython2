@@ -1,0 +1,28 @@
+
+<%@ page  import="java.sql.Connection" import="java.sql.Statement" import="databaseconnection.*" import="javax.swing.JOptionPane"%>
+</head>
+<body>
+<!--
+This is a free CSS template provided by templatemo.com
+-->
+
+<%@ page import="com.oreilly.servlet.MultipartRequest" import="java.util.*" %>  
+<%  
+MultipartRequest m = new MultipartRequest(request, "C:/files"); 
+String id=m.getParameter("id");
+String fname=m.getFilesystemName("fname") ;
+//System.out.println(user);
+System.out.println(new Date());
+Connection con1 = databasecon.getconnection();
+	Statement st1 = con1.createStatement();
+	
+	String sss1 = "insert into download(complaint,fname) values('"+id+"','"+fname+"') ";
+	st1.executeUpdate(sss1);
+
+response.sendRedirect("completedcomplaints.jsp?msg=null");
+  
+%>  
+ 
+
+<!-- ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc -->
+       

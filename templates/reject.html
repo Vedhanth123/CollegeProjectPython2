@@ -1,0 +1,18 @@
+
+
+<%@page import="java.sql.*,java.util.*,java.text.*"%>
+<%@page import="databaseconnection.*"%>
+<%
+String bookid,email=null;
+String sno=request.getParameter("id");
+int rs=0;
+Connection con=databasecon.getconnection();
+	Statement st=con.createStatement();
+	rs=st.executeUpdate("update victim set status='NO' where vno='"+sno+"' ");
+	
+if(rs!=0){
+response.sendRedirect("avictim.jsp?m=null");
+}	
+		
+			
+%>

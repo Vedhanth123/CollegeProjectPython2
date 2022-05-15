@@ -1,0 +1,160 @@
+<%-- 
+    Document   : ws
+    Created on : Jul 2, 2016, 7:57:14 PM
+    Author     : java4
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page  import="java.sql.*" import="databaseconnection.*" import="javax.swing.JOptionPane"%>
+<!DOCTYPE html">
+<html>
+     <style> 
+
+.inputs {
+    background: #fff;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 10px;
+    width: 200px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 3px rgba( 0, 0, 0, 0.1 );
+    clear: both;
+}
+
+.inputs:focus {
+    background: #fff;
+    box-shadow: 0 0 0 3px #fff38e, inset 0 2px 3px rgba( 0, 0, 0, 0.2 ), 0px 5px 5px rgba( 0, 0, 0, 0.15 );
+    outline: none;
+}
+.inputss {
+    background: #f5f5f5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 10px;
+    width: 200px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 3px rgba( 0, 0, 0, 0.1 );
+    clear: both;
+}
+
+.inputss:focus {
+    background: #fff;
+    box-shadow: 0 0 0 3px #fff38e, inset 0 2px 3px rgba( 0, 0, 0, 0.2 ), 0px 5px 5px rgba( 0, 0, 0, 0.15 );
+    outline: none;
+}
+.button {
+    background-color: #0096da; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+<head>
+<title>Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-yanone.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/coin-slider.min.js"></script>
+</head>
+               
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+          <br><h2>crime investigation management</h2>
+      </div>
+      <div class="clr"></div>
+     
+            <%
+if(request.getParameter("msg")!=null)
+				 
+{
+					
+  out.println("<script>alert('Login Successful..!')</script>");
+				  
+}
+%>
+     <%@include file="iheader.jsp"%>
+     <div class="clr"></div>
+      <div class="slider">
+        <div id="coin-slider"> <a href="#"><img src="images/slide1.jpg" width="960" height="320" alt="" /><br /></a>
+                               <a href="#"><img src="images/slide2.jpg" width="960" height="320" alt="" /><br /></a> 
+                               <a href="#"><img src="images/slide3.jpg" width="960" height="320" alt="" /><br /></a> 
+        </div>
+        <div class="clr"></div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Investigation Files</span></h2><br>
+          <%
+String name=request.getParameter("id");
+
+
+
+	Connection con1 = databasecon.getconnection();
+	Statement st1 = con1.createStatement();
+	
+	String sss1 = "select * from download where complaint='"+name+"'";
+	ResultSet rs=st1.executeQuery(sss1);
+	%>
+	<font color="#99cc00" size="4">
+<table cellspacing="5" border="2" >
+<tr><th><font size="4" color="#ff0033">Complaint Name<th><font size="4" color="#ff0033">File Name <th><font size="4" color="#ff0033">Action 
+	<%
+	while(rs.next())
+	{
+		%>
+		<tr><td width="170" height="32" ><div align="center"><%=rs.getString(2)%><td width="170" height="32"><div align="center"><%=rs.getString(3)%><td width="170" height="32"><div align="center"><a href='download.jsp?fname=<%=rs.getString(3)%>'>Download</a>
+		<%
+	}
+		%>
+		</table>
+          <div class="clr"></div>
+        
+        </div>
+
+
+
+
+<!--- end body---->
+        
+
+      
+      </div>
+      <%@include file="iside.jsp"%>
+	 
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="fbg">
+
+  </div>
+  <div class="footer">
+    <div class="footer_resize"> 
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

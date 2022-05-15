@@ -1,0 +1,39 @@
+
+
+<%@page import="java.sql.*,java.text.*"%>
+<%@page import="databaseconnection.*"%>
+<%@ page  import="Mail.mail"%>
+<%@ page import="java.util.*" %>
+
+<%
+String bookid,email=null;
+String sno=request.getParameter("id");
+String vid=request.getParameter("vid");
+String complaint=request.getParameter("complaint");
+int rs=0;
+Connection con=databasecon.getconnection();
+	Statement st2=con.createStatement();
+	String sss1 = "select * from victim where vno='"+vid+"'";
+	                   Statement st = con.createStatement();
+					   ResultSet rs1=st.executeQuery(sss1);
+					   System.out.println(sss1);
+String smail=null;	
+	if(rs1.next())
+	{
+		 smail=rs1.getString("email");
+		 int i =st2.executeUpdate("update complaint set status='"+complaint+"' where cno='"+sno+"'");
+					String msg="Report Status  :"+complaint;
+					mail.mailsend(msg,smail);
+
+	
+	
+	
+		
+	
+	
+if(i!=0){
+response.sendRedirect("newcomplaint.jsp?mm=null");
+}	
+	}	
+			
+%>

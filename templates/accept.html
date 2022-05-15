@@ -1,0 +1,40 @@
+
+
+<%@page import="java.sql.*,java.text.*"%>
+<%@page import="databaseconnection.*"%>
+<%@ page  import="Mail.mail"%>
+<%@ page import="java.util.*" %>
+
+<%
+String bookid,email=null;
+String sno=request.getParameter("id");
+int rs=0;
+Connection con=databasecon.getconnection();
+	Statement st1=con.createStatement();
+	
+	
+	String sss1 = "select * from victim where vno='"+sno+"'";
+		String otp = null;
+                        otp = UUID.randomUUID().toString().substring(0, 5);
+                        
+                       Statement st = con.createStatement();
+					   Statement st2 = con.createStatement();
+             String smail=null,msg=null;           
+	System.out.println(sss1);
+	ResultSet rs1=st1.executeQuery(sss1);
+	if(rs1.next())
+	{
+		 smail=rs1.getString("email");
+		int i =st2.executeUpdate("update victim set uidno='"+otp+"' where vno='"+sno+"'");
+					msg="UID NO :"+otp;
+					mail.mailsend(msg,smail);
+
+	rs=st1.executeUpdate("update victim set status='YES' where vno='"+sno+"' ");
+	}
+	
+if(rs!=0){
+response.sendRedirect("avictim.jsp?mm=null");
+}	
+		
+			
+%>
